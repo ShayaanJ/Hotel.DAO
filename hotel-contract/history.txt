@@ -1,0 +1,2 @@
+#V2
+(contract-call? .hotel is-booked u2)

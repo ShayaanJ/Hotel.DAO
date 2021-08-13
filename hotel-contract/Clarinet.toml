@@ -1,0 +1,6 @@
+[project]
+name = "hotel-contract"
+requirements = []
+[contracts.hotel]
+path = "contracts/hotel.clar"
+depends_on = []
