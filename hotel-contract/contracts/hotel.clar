@@ -22,8 +22,9 @@
     (begin
     (unwrap! (stx-transfer? (* y days) tx-sender (as-contract tx-sender)) (err ROOM_BOOKED))
     (map-set room {room-id: room-num} {rentee: (some tx-sender), booked: true, price: u50, total-days: days})
-    (ok u1)))
+    (ok "You have checked in to your room.")))
     )
+)
     ;; (asserts! (unwrap! x (err u1)) (err ROOM_BOOKED))
     ;; (stx-transfer? (* (unwrap! y (err u1)) days) tx-sender (as-contract tx-sender))
     ;; (var-set bruh u3)
@@ -44,7 +45,6 @@
     ;; (stx-transfer? (* z days) tx-sender (as-contract tx-sender))
     ;; (ok (map-set room {room-id: room-num} {rentee: (some tx-sender), booked: true, price: u50, total-days: days}))
     ;; (map-set room {room-id: room-num} {rentee: (some tx-sender), booked: true, price: u50, total-days: days})
-)
 
 (define-read-only (is-booked (room-num uint))
     (unwrap-panic (get booked (map-get? room {room-id: room-num})))
@@ -70,6 +70,6 @@
 
 ;;)
 
-;;(define-public (check-out)
-
-;;)
+(define-public (check-out)
+    (ok u2)
+)
