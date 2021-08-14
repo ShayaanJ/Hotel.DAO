@@ -8,6 +8,10 @@
 (define-read-only (what-is (room-num uint))
     (map-get? room {room-id: room-num})
 )
+
+(define-read-only (get-rentee (room-num uint))
+   (unwrap-panic (get rentee (map-get? room {room-id: room-num})))
+)
     
 (define-read-only (is-booked (room-num uint))
     (unwrap-panic (get booked (map-get? room {room-id: room-num})))
@@ -17,17 +21,15 @@
    (unwrap-panic (get price (map-get? room {room-id: room-num})))
 )
 
-(define-read-only (get-rentee (room-num uint))
-   (unwrap-panic (get rentee (map-get? room {room-id: room-num})))
+(define-read-only (get-days (room-num uint))
+   (unwrap-panic (get total-days (map-get? room {room-id: room-num})))
 )
 
 (define-read-only (get-time (room-num uint))
    (unwrap-panic (get chk-in-time (map-get? room {room-id: room-num})))
 )
 
-(define-read-only (get-days (room-num uint))
-   (unwrap-panic (get total-days (map-get? room {room-id: room-num})))
-)
+;;--------------------PUBLIC  FUNCTIONS----------------------------------
 
 (define-public (check-in (days uint) (room-num uint))
     (let ( 
@@ -58,7 +60,7 @@
         (begin
             (if 
             (> diff din)
-            (unwrap! (stx-transfer? (* (- din diff) (get-price room-num)) tx-sender (as-contract tx-sender)) (err u1))
+            (unwrap! (stx-transfer? (* (- diff din) (get-price room-num)) tx-sender (as-contract tx-sender)) (err u1))
             false
             )
 
