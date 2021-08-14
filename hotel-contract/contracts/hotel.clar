@@ -56,8 +56,8 @@
             (in-time (get-time room-num))
             (din (get-days room-num))
 
-            (diff (/ (- chk-out-time in-time) u86400))
             (chk-out-time (unwrap-panic (get-block-info? time (- block-height u1))))
+            (diff (/ (- chk-out-time in-time) u86400))
         )
         (if
         (is-eq blah tx-sender)
